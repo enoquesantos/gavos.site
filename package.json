@@ -1,0 +1,30 @@
+{
+  "name": "gavos.site",
+  "version": "1.0.0",
+  "description": "Projeto do site estático do projeto Gavos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/enoquesantos/gavos.site.git"
+  },
+  "keywords": [
+    "Agravos",
+    "Saúde",
+    "Risco",
+    "Ocorrência",
+    "Vigilância",
+    "Epidemiológico"
+  ],
+  "author": "Enoque Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enoquesantos/gavos.site/issues"
+  },
+  "homepage": "https://github.com/enoquesantos/gavos.site#readme",
+  "dependencies": {
+    "browser-sync": "^2.29.1"
+  }
+}

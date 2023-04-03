@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="SIGAV é um Sistema de Gerenciamento de Agravos a Saúde" name="description">
-        <meta content="Sistema, Gerenciamento, Agravos, Saúde, Risco, Ocorrência, Vigilância Epidemiológica" name="keywords">
+        <meta content="GAVOS é um App para gerenciar Agravos a Saúde" name="description">
+        <meta content="Agravos, Saúde, Risco, Ocorrência, Vigilância, Epidemiológico" name="keywords">
         <meta name="theme-color" content="#7952b3">
         <link rel="icon" href="assets/img/favicons/favicon.ico">
-        <title>Bem vindo ao SIGAV - Sistema de Gerenciamento de Agravos</title>
+        <title>Bem vindo ao GAVOS - Um App para gerenciar Agravos a Saúde</title>
 
         <!-- Google Fonts -->
         <link
@@ -40,7 +40,7 @@
             <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
                     <span class="text-app">GAVOS</span>
-                    <small class="small text-app"><i class="me-1 bi bi-clipboard2-pulse"></i>Sistema de Gerenciamento de Agravos</small>
+                    <small class="small text-app"><i class="me-1 bi bi-clipboard2-pulse"></i>Sistema de Gerenciamento de Agravos a Saúde</small>
                 </a>
                 <nav id="navbar" class="navbar">
                     <ul>
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-lg-6 d-flex flex-column justify-content-center">
                         <div class="me-sm-2">
-                            <h1 class="text-app">Gerencie projetos de controle de agravos</h1>
+                            <h1 class="text-app">Crie e gerencie projetos de controle de agravos a Saúde</h1>
                         </div>
                         <div class="me-sm-2 mt-4">
                             <h3><i class="me-2 bi bi-diagram-2"></i> Defina os parâmetros de risco</h3>
@@ -70,9 +70,12 @@
                         <div class="me-sm-2 mt-2">
                             <h3><i class="me-2 bi bi-file-spreadsheet"></i> Gere boletim diário</h3>
                         </div>
+                        <div class="me-sm-2 mt-2">
+                            <h3><i class="me-2 bi bi-cloud-download"></i> Exporte para Excel, PDF ou JSON</h3>
+                        </div>
                         <div class="mt-3">
-                            <a href="#scrollspyForm" class="btn btn-primary">
-                                <span>COMEÇAR NOVO PROJETO</span><i class="ms-1 bi bi-arrow-right"></i>
+                            <a href="#project-setup-container" class="btn btn-primary">
+                                Iniciar novo projeto <i class="ms-2 bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -94,142 +97,164 @@
 
         <main id="main" class="main">
             <div class="container">
-                <div id="scrollspyForm" class="container-fluid py-5"></div>
-                <div class="col-md-12 my-5 py-5">
-                    <h2 class="text-app">Configurar novo projeto</h2>
-                    <hr>
-                    <form id="project-config" class="py-3">
-                        <div class="step-1">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <label for="project_name">Nome do Projeto</label>
-                                    <input type="text" class="form-control" id="project-name" name="project_name" placeholder="Nome do projeto">
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <label for="ocorrunce_type">Tipo de agravo</label>
-                                    <div class="row">
-                                        <div class="col col-12 float-start">
-                                            <select name="ocorrunce_type" id="ocorrunce-type" class="form-control">
-                                                <option value="dengue">Dengue</option>
-                                                <option value="febre-amarela">Febre Amarela</option>
-                                                <option value="covid">COVID-19</option>
-                                                <option value="other">Outra</option>
-                                            </select>
-                                        </div>
-                                        <div class="col col-6 float-end d-none">
-                                            <input type="text" name="ocorrunce_type_other" id="ocorrunce_type_other" class="form-control" value="Dengue" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div id="project-setup-container" class="container-fluid py-5"></div>
 
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <label for="coverage">Abrangência</label>
-                                    <select name="coverage" id="coverage" class="form-control">
-                                        <option value="country">Um país inteiro</option>
-                                        <option value="state">Por Estado</option>
-                                        <option value="city">Um município apenas</option>
-                                        <option value="institutional">Por instituição</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <label for="coverage_detail">Especificação da abrangência</label>
-                                    <select name="coverage_country" id="coverage-country" class="form-control">
-                                        <option valuer="br">Brasil</option>
-                                    </select>
-
-                                    <div id="coverage-location" class="mb-6 d-none">
-                                        <div class="col col-4 pe-1 float-start">
-                                            <select name="coverage_state" id="coverage-state" class="form-control"></select>
-                                        </div>
-                                        <div class="col col-8 ps-1 float-end">
-                                            <select name="coverage_city" id="coverage-city" class="form-control d-none"></select>
-                                        </div>
-                                    </div>
-
-                                    <div id="coverage-org" class="mb-6 d-none">
-                                        <div class="col col-11 float-start">
-                                            <div class="form-control py-2" id="coverage-institutional">
-                                                <span id="org-list-info" class="text-app">Use o botão ao lado para incluir uma instituição</span>
-                                            </div>
-                                        </div>
-                                        <div class="col col-1 float-end">
-                                            <button title="Adicionar Instituição" class="btn btn-info float-end" type="button" data-bs-toggle="modal" data-bs-target="#modal">
-                                                <i class="bi bi-folder-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- separator -->
-                            <hr class="bg-info border-1 border-top border-info my-4">
-
-                            <div class="row">
-                                <div class="mb-3 col-6">
-                                    <label for="project_coodinator">Nome do coordenador do projeto</label>
-                                    <input type="text" class="form-control" id="project_coodinator" name="project_coodinator" placeholder="Nome completo do coordenador do projeto">
-                                </div>
-                                <div class="mb-3 col-6">
-                                    <label for="project_coodinator">Email do coordenador do projeto</label>
-                                    <input type="email" class="form-control" id="project_coodinator_mail" name="project_coodinator_mail" placeholder="Email do coordenador do projeto">
-                                </div>
-                            </div>
-
-                            <!-- separator -->
-                            <hr class="bg-info border-1 border-top border-info my-4">
-
-                            <div class="row">
-                                <div class="mb-3 col-6">
-                                    <label for="project_users">Pessoas que irão alimentar o projeto<i class="ms-1 bi bi-question-circle"></i></label>
-                                    <textarea id="project_users" name="project_users" placeholder="Escreva o email e tecle enter" rows="1"></textarea>
-                                </div>
-                                <div class="mb-3 col-6">
-                                    <label class="form-check-label" for="visibility">Permite acesso ao público?<i class="ms-1 bi bi-question-circle"></i></label><br>
-                                    <select class="form-control" id="project_visibility" name="project_visibility">
-                                        <option>Não</option>
-                                        <option>Sim</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="me-sm-12 p-right py-3">
-                                <button type="button" class="btn btn-primary float-end">Avançar<i class="ms-2 bi bi-arrow-right"></i></button>
-                            </div>
-                        </div>
-                        <div class="step-2"></div>
-                    </form>
-                </div>
+				<form id="project-setup-form" class="py-5">
+					<div id="setup-carousel" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+						<div class="carousel-inner px-2 py-5">
+							<div class="carousel-item active">
+								<div class="col-md-12">
+									<h2 class="text-app">Configurar novo projeto</h2>
+									<hr>
+									<div class="row">
+										<div class="col-6 mb-3">
+											<label for="project_name">Nome do Projeto</label>
+											<input type="text" class="form-control req" id="project-name" name="project_name" placeholder="Descreva um nome para o projeto">
+										</div>
+										<div class="col-6 mb-3">
+											<label for="occurrence_type">Tipo de agravo</label>
+											<div class="row">
+												<div class="col col-12 float-start">
+													<select class="form-control req" id="occurrence-type" name="occurrence_type">
+														<option value="dengue">Dengue</option>
+														<option value="febre-amarela">Febre Amarela</option>
+														<option value="covid">COVID-19</option>
+														<option value="other">Outra</option>
+													</select>
+												</div>
+												<div class="col col-6 float-end d-none">
+													<input type="text" class="form-control" id="occurrence-type-other" name="occurrence_type_other" placeholder="Descreva o agravo aqui" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 mb-3">
+											<label for="coverage">Abrangência</label>
+											<select class="form-control req" id="coverage" name="coverage">
+												<option value="country">Um país inteiro</option>
+												<option value="state">Por Estado</option>
+												<option value="city">Um município apenas</option>
+												<option value="organization">Por empresa/organização</option>
+											</select>
+										</div>
+										<div class="col-6 mb-3">
+											<label for="coverage_detail">Especificação da abrangência</label>
+											<select class="form-control" id="coverage-country" name="coverage_country">
+												<option valuer="br">Brasil</option>
+											</select>
+											<div id="coverage-location" class="mb-6 d-none">
+												<div class="col col-4 pe-1 float-start">
+													<select class="form-control" id="coverage-state" name="coverage_state"></select>
+												</div>
+												<div class="col col-8 ps-1 float-end">
+													<select class="form-control d-none" id="coverage-city" name="coverage_city"></select>
+												</div>
+											</div>
+											<div id="coverage-organization" class="mb-6 d-none">
+												<div class="col col-11 float-start">
+													<div id="coverage-organization-list">
+														<span class="form-control text-muted" id="org-list-info">Use o botão ao lado para incluir uma organização</span>
+													</div>
+												</div>
+												<div class="col col-1 float-end">
+													<button type="button" class="btn btn-info float-end" id="add-org-btn" title="Adicionar Organização" data-bs-toggle="modal" data-bs-target="#org-modal">
+														<i class="bi bi-folder-plus"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- separator -->
+									<hr class="bg-info border-1 border-top border-info my-4">
+									<div class="row">
+										<div class="mb-3 col-3">
+											<label for="project_coodinator">Nome do coordenador do projeto</label>
+											<input type="text" class="form-control req" id="project-coodinator-name" name="project_owner_name" placeholder="Nome completo da pessoa">
+										</div>
+										<div class="mb-3 col-3">
+											<label for="project_coodinator">Email do coordenador do projeto</label>
+											<input type="email" class="form-control req" id="project-coodinator-mail" name="project_owner_mail" placeholder="Email do coordenador">
+										</div>
+										<div class="mb-3 col-6">
+											<label for="project_users">Outros membros do projeto<i class="ms-1 bi bi-question-circle" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Digite somente o email e criaremos um login para essa pessoa caso ainda não tenha uma conta na plataforma. Em seguida, será concedido a essa pessoa o acesso ao seu projeto. Digite o email e tecle enter."></i></label>
+											<textarea id="project-users" name="project_users" placeholder="Escreva o email e tecle enter" rows="1"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="carousel-item">
+								<!-- last setup step -->
+								<div class="col-md-12">
+									<h2 class="text-app">Configurar parâmetros</h2>
+									<hr>
+									<div class="row">
+										<div class="col-6 mb-3">
+											<label for="project_name">Nome do Projeto</label>
+											<input type="text" class="form-control" id="project-name" name="project_name" placeholder="Nome do projeto">
+										</div>
+										<div class="col-6 mb-3">
+											<label for="occurrence_type">Tipo de agravo</label>
+											<div class="row">
+												<div class="col col-12 float-start">
+													<select class="form-control" id="occurrence-type" name="occurrence_type">
+														<option value="dengue">Dengue</option>
+														<option value="febre-amarela">Febre Amarela</option>
+														<option value="covid">COVID-19</option>
+														<option value="other">Outra</option>
+													</select>
+												</div>
+												<div class="col col-6 float-end d-none">
+													<input type="text" class="form-control" id="occurrence-type-other" name="occurrence_type_other" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="me-sm-12 py-3">
+						<button type="button" class="btn btn-warning float-start p-left d-none" id="previous-setup-step-btn">
+							<i class="bi bi-arrow-left"></i> Voltar
+						</button>
+						<button type="button" class="btn btn-primary float-end p-right" id="last-setup-step-btn">
+							Avançar <i class="bi bi-arrow-right"></i>
+						</button>
+						<button type="button" class="btn btn-primary float-end p-right d-none" id="submit-project-btn">
+							Criar projeto <i class="bi bi-upload"></i>
+						</button>
+					</div>
+				</form>
             </div>
         </main>
 
         <footer id="footer" class="footer mt-auto text-center">
             <div class="container"></div>
 
-            <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div id="org-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title text-app">Adicionar Instituição ao Projeto</h3>
+                            <h3 class="modal-title text-app">Adicionar Organização ao Projeto</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="add-org-form" class="p-3">
+                            <form id="org-form" class="p-3">
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label class="float-start" for="org_doc">CNPJ</label>
-                                        <input type="text" maxlength="18" class="form-control cnpj" id="org-doc" name="org_doc" placeholder="CNPJ da Instituição">
+                                        <input type="text" maxlength="18" class="form-control cnpj" id="org-doc" name="org_doc" placeholder="CNPJ">
                                     </div>
                                     <div class="col-6">
                                         <label class="float-start" for="org_name">Razão Social</label>
-                                        <input type="text" class="form-control text-uppercase" id="org-name" name="org_name" placeholder="Razão Social da Instituição">
+                                        <input type="text" class="form-control text-uppercase" id="org-name" name="org_name" placeholder="Razão Social">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col col-6">
                                         <label class="float-start" for="org_mail">Email</label>
-                                        <input type="email" class="form-control text-lowercase" id="org-mail" name="org_mail" placeholder="Email da Instituição">
+                                        <input type="email" class="form-control text-lowercase" id="org-mail" name="org_mail" placeholder="Email para contato">
                                     </div>
                                     <div class="col col-6">
                                         <div class="col col-4 pe-1 float-start">
@@ -244,18 +269,38 @@
                                 </div>
                                 <div class="row p-right">
                                     <div class="col col-8 py-2">
-                                        <span class="small float-start text-app"><i class="me-2 bi bi-info-circle"></i>Poderá incluir mais informações da instituição posteriormente.</span>
+                                        <span class="small float-start text-app"><i class="me-2 bi bi-info-circle"></i>Poderá incluir mais informações da emrpesa/organização posteriormente.</span>
                                     </div>
                                     <div class="col col-4">
-                                        <button id="add-org-btn" type="button" class="btn btn-primary float-end">Adicionar<i class="ms-2 bi bi-save"></i></button>
-                                        <button id="add-org-cancel" type="button" class="d-none" data-bs-dismiss="modal"></button>
+                                        <button id="save-org-btn" type="button" class="btn btn-primary float-end">Adicionar<i class="ms-2 bi bi-save"></i></button>
+                                        <button id="save-org-cancel" type="button" class="d-none" data-bs-dismiss="modal"></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
+
+            <div id="msg-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Atenção</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="message-modal-body"></p>
+                        </div>
+                        <div class="modal-footer">
+                        	<div class="container">
+								<button type="button" class="btn btn-secondary float-start" data-bs-dismiss="modal">Fechar</button>
+								<button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">Ok</button>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         <script
